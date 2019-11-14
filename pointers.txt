@@ -1,0 +1,153 @@
+Pointers :
+another way to implement passing by reference
+Traverse arrays
+manipulate dynamic storage
+reperesent relationships in data structure
+
+#include <cmath> 
+using namespace std;
+
+
+double& means reference to double 
+double* means pointer to double
+
+*p - 'the valued stored at the pointer' 
+&p - 'the pointer of the memory'
+
+double a = 3.2;
+double b = 5.1;
+double* p = &a;
+
+double c = a
+double d = *p // set d to 3.2
+
+// Error 
+double* q = 3.6 //needs a pointer
+double d = p //needs a value
+p = b // either *p = b(storing value of b to a) or p =&b (assigning pointer to p)
+
+p = &b;
+*p += 4; or *p = *p +4; // b = 9.1
+
+
+int k = 7;
+p = &k; // will not compile due to mismatching type
+int* z = &k; // will compile as they have the same type
+
+cout << (k * b); // will compile as it is just int * int aka 63.7
+cout << (k * p); //will not compile since int can not multiple pointer
+cout << (k * *p); // will compile as it is int * int aka 63.7
+cout << (*z * *p); //will compile and result in an double aka 63.7
+
+
+//DO NOT DO THIS! UNDEFINED BEHAVIOR DUE TO UNINITIALIZED POINTER
+double* q;
+*q = 4;
+
+//DO THIS
+double* q;
+*q = p; // make sure to properly initialize a pointer to q 
+
+double* r = &a;
+*r = b; // a = 9.1
+
+if(p == r) //false      comparing pointers
+
+if(p == q) //true comparing pointer
+
+if( *p == *r) //true comparing doubles
+
+
+USING POINTERS TO TRAVERSE ARRAYS
+----------------------------------
+
+const int MAXSIZE = 5;
+double da[MAXSIZE];
+int k;
+doube* dp;
+
+for( k = 0; k < MAXSIZE; k++){
+	da[k] = 3.6;
+}
+
+for (dp = &da[0]; ... ; dp++){
+	*dp = 3.6;
+}
+
+ 1000 1008 1016 1024 1032 1040
+ 0    1    2    3    4    5 
+
+it is okay to point to the imaginary slot out of bounds of the array 
+
+*&x = x;
+&a[i] + j = &a[i+j];
+&a[i] < & a[j] => i < j
+
+reasons why you can use dp ++ for the loop 
+dp++
+dp = dp + 1
+dp = &da[0] + 1
+dp = &da[0+1]
+dp = &da[1]
+
+
+
+condition fo the for-loop thus can be
+dp < &da[MAXSIZE]; // &dp[MAXSIZE] is the pointer 1040
+
+Simplified version
+dp < da + MAXSIZE
+
+reason behind simplified version
+da = &da[0]
+&da[5] = &da[0+5]
+&da[5] = &da[0] + 5
+&da[5] = da + 5
+
+using pointer array is actually faster 
+
+When array names are used without the [] specification such as int a[5]
+a = &a[0];
+
+string b[6] = {"rat" , "pig", "goat", "zebra", "pig", "rat"};
+
+int m = lookup(b,6,"zebra"); //3 
+int m2 = lookup(&b[0],6,"zebra") //3
+int k = lookup(b,3,"zebra"); // -1
+int j = lookup(&b[2],3,"zebra // 1
+
+the array start on the pointer so &b[2] causes the array to start on goat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
