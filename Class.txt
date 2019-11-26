@@ -1,0 +1,56 @@
+struct Target{
+	public: // can be access outside
+		void init();
+		bool move(char dir);
+		void replayHistory();
+		int position() const;
+	private: // only accessible within object
+		int pos;
+		string history; // DO NOT MAKE DATA MEMBERS PUBLIC
+//Invariant:
+//History contains of only Rs and Ls
+//pos == number of R's - number of L's
+};
+
+void Target::init(){
+	pos = 0;
+	this->history = "";
+}
+
+bool Target::move(char dir){
+	switch(dir){
+	case 'R':
+	case 'r':
+	case 'L':
+	case 'l':
+		break;
+	default:
+		return false;
+	}	
+	this->history ++ toupper(dir);
+	return true;
+}
+void Target::replayHistory(){
+	for(int k = 0; k != this->history.size(); k++){
+		cout << this->history[k] << endl;
+	}
+}
+
+int Target::position() const{
+	return this->position;
+}
+
+void report(const Target&t){
+	cout << "There's a target at " << "position " << t.position() << endl;
+}
+
+int main(){
+	Target t;
+	t.init();
+	
+	t.move('R');
+	repeatMove(t,3,'L');
+	
+	
+
+}
